@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/imgCover"
+        android:layout_width="@dimen/size130"
+        android:layout_height="@dimen/size180"
+        android:layout_margin="@dimen/space16"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/image"
+        tools:src="@tools:sample/avatars"/>
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space16"
+        android:layout_marginEnd="@dimen/space16"
+        android:text="@string/title"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font16"
+        android:textStyle="bold"
+        android:ellipsize="end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgCover"
+        app:layout_constraintTop_toTopOf="@+id/imgCover" />
+
+    <ImageView
+        android:id="@+id/imgFav"
+        android:layout_width="@dimen/size25"
+        android:layout_height="@dimen/size25"
+        android:layout_marginEnd="@dimen/space16"
+        android:visibility="gone"
+        android:src="@drawable/ic_baseline_favorite_red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtTitle"
+        android:contentDescription="@string/image" />
+
+    <RatingBar
+        android:id="@+id/rating"
+        style="?android:attr/ratingBarStyleSmall"
+        android:theme="@style/RatingBar"
+        tools:rating="3.5f"
+        android:numStars="5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space16"
+        android:layout_marginTop="@dimen/space16"
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintStart_toEndOf="@+id/imgCover"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+
+    <TextView
+        android:id="@+id/txtReviews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/xx_reviews"
+        android:textSize="@dimen/font12"
+        android:textStyle="bold"
+        android:textColor="@color/colorGrayText"
+        android:layout_marginStart="@dimen/space16"
+        android:layout_marginTop="@dimen/space16"
+        app:layout_constraintStart_toEndOf="@+id/rating"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space16"
+        android:layout_marginTop="@dimen/space16"
+        android:layout_marginEnd="@dimen/space16"
+        android:weightSum="3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgCover"
+        app:layout_constraintTop_toBottomOf="@+id/rating">
+
+        <TextView
+            android:id="@+id/txtWacth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/_12m"
+            android:textColor="@color/colorGrayText"
+            android:textSize="@dimen/font12"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_baseline_remove_red_eye_24" />
+
+        <TextView
+            android:id="@+id/txtFav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space8"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/_9m"
+            android:visibility="invisible"
+            android:textColor="@color/colorGrayText"
+            android:textSize="@dimen/font12"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_baseline_favorite_24" />
+
+        <TextView
+            android:id="@+id/txtDownloaded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space8"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/_3k"
+            android:visibility="invisible"
+            android:textColor="@color/colorGrayText"
+            android:textSize="@dimen/font12"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_baseline_arrow_circle_down_24" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space16"
+        android:layout_marginTop="@dimen/space16"
+        android:layout_marginEnd="@dimen/space16"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="@string/lorem_ipsum"
+        android:textColor="@color/colorFontDefault"
+        android:textSize="@dimen/font14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgCover"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/txtGenre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space16"
+        android:layout_marginStart="@dimen/space16"
+        android:layout_marginEnd="@dimen/space16"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:visibility="gone"
+        android:text="@string/lorem_ipsum"
+        android:textColor="@color/colorGrayText"
+        android:textSize="@dimen/font12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgCover"
+        app:layout_constraintTop_toBottomOf="@+id/txtDesc" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

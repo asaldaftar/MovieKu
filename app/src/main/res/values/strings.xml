@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">MovieKu</string>
+    <string name="image">image</string>
+    <string name="created_by">Created By</string>
+    <string name="irvandy_handoyo">Irvandy Handoyo</string>
+    <string name="title">Title</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="urutkan">urutkan</string>
+    <string name="_3k">3K</string>
+    <string name="_9m">9M</string>
+    <string name="_12m">12M</string>
+    <string name="xx_reviews">xx reviews</string>
+    <string name="movieku">MovieKu</string>
+    <string name="hotel_transylvania_3_summer_vacation">Hotel Transylvania 3: Summer Vacation</string>
+    <string name="description">Description</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="trailer">TRAILER</string>
+    <string name="ketik_pencarian">Ketik Pencarian</string>
+    <string name="reviews">REVIEWS</string>
+    <string name="_4_5">4.5</string>
 </resources>

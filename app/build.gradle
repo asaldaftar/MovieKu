@@ -17,6 +17,21 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        def addConstant = { constantName, constantValue ->
+            manifestPlaceholders += [(constantName): constantValue]
+            buildConfigField "String", "${constantName}", "\"${constantValue}\""
+        }
+
+        addConstant("API_DEV", "https://api.themoviedb.org/3/")
+        addConstant("API_LIVE", "https://api.themoviedb.org/3/")
+        addConstant("API_KEY", "32e7dc78322588e2b6b877d176f79782")
+        addConstant("ACCESS_TOKEN", "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMmU3ZGM3ODMyMjU4OGUyYjZiODc3ZDE3NmY3OTc4MiIsInN1YiI6IjYwNDcxNWEwNDI4NGVhMDAyNzk1MzY3OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9YmIRmJdSr16c8hk1EJTLUVhnIBImiM97LPun0-xGMI")
+        addConstant("URL_IMG_500", "https://image.tmdb.org/t/p/w500")
+        addConstant("URL_IMG_ORI", "https://image.tmdb.org/t/p/original")
+        addConstant("DATABASE_NAME", "movieku.db")
+        addConstant("LIMIT_PAGINATION", 20)
+
         javaCompileOptions {
             annotationProcessorOptions { arguments += ["room.schemaLocation": "$projectDir/schemas".toString()] }
         }
@@ -63,7 +78,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
 
     //Mockito Test
-    testImplementation 'org.mockito:mockito-core:2.25.0'
+    testImplementation 'org.mockito:mockito-core:2.28.2'
     androidTestImplementation 'org.mockito:mockito-android:2.25.0'
 
     //Unit Test
@@ -90,6 +105,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.7.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.7.2'
     implementation 'com.squareup.retrofit2:converter-scalars:2.7.1'
+
     //OkHttp3
     implementation 'com.squareup.okhttp3:logging-interceptor:4.3.1'
 
@@ -103,6 +119,7 @@ dependencies {
     //Room Database
     implementation 'androidx.room:room-runtime:2.2.6'
     kapt('androidx.room:room-compiler:2.2.6')
+
 
     //CircleImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'
@@ -119,4 +136,7 @@ dependencies {
 
     //Material Design
     implementation 'com.google.android.material:material:1.3.0'
+
+    // YoutubePLayer
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
 }
