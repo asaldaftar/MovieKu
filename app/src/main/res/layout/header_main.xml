@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintToolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/space16"
+        android:paddingTop="@dimen/space8"
+        android:paddingEnd="@dimen/space16"
+        android:paddingBottom="@dimen/space8"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imgIcon"
+            android:layout_width="@dimen/size20"
+            android:layout_height="@dimen/size20"
+            android:contentDescription="@string/image"
+            android:src="@drawable/ic_baseline_local_movies_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtHeaderTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space16"
+            android:text="@string/movieku"
+            android:textSize="@dimen/font16"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlue"
+            app:layout_constraintBottom_toBottomOf="@+id/imgIcon"
+            app:layout_constraintStart_toEndOf="@+id/imgIcon"
+            app:layout_constraintTop_toTopOf="@+id/imgIcon" />
+
+        <RelativeLayout
+            android:id="@+id/relativeSearch"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size30"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/space8"
+            android:background="@drawable/bg_input_white"
+            android:focusableInTouchMode="true"
+            android:gravity="center_vertical"
+            android:padding="@dimen/space8"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imgIcon"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/inputQuery"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/iconSearch"
+                android:background="@android:color/white"
+                android:hint="@string/ketik_pencarian"
+                android:imeOptions="actionSearch"
+                android:inputType="textPersonName"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/colorBGStrokeGray"
+                android:textSize="@dimen/font12"
+                tools:ignore="Autofill" />
+
+            <ImageView
+                android:id="@+id/iconSearch"
+                android:layout_width="@dimen/size25"
+                android:layout_height="@dimen/size25"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/image"
+                android:src="@drawable/ic_baseline_search_24" />
+
+        </RelativeLayout>
+        <ImageView
+            android:id="@+id/imgSearch"
+            android:layout_width="@dimen/size25"
+            android:layout_height="@dimen/size25"
+            android:contentDescription="@string/image"
+            android:visibility="gone"
+            android:src="@drawable/ic_baseline_search_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:id="@+id/imgFav"
+            android:layout_width="@dimen/size25"
+            android:layout_height="@dimen/size25"
+            android:contentDescription="@string/image"
+            android:src="@drawable/ic_baseline_favorite_red"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
