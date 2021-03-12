@@ -99,9 +99,10 @@ class MovieAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         if (viewHolder.itemViewType == VIEW_MOVIE) {
             val holder = viewHolder as MovieItemHolder
             holder.binding.txtTitle.text = model.title
-            holder.binding.rating =
-            holder.binding.txtTitle.text = model.title
-            holder.binding.txtTitle.text = model.title
+            holder.binding.rating.rating = (model.vote_average.toFloat() / 2)
+            holder.binding.txtReviews.text = "${model.vote_count} reviews"
+            holder.binding.txtDesc.text = model.overview
+            holder.binding.txtWacth.text = model.popularity.toString()
             if (model.poster_path != null) {
                 Glide.with(holder.itemView.context)
                     .load(BuildConfig.URL_IMG_500 + model.poster_path)
