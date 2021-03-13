@@ -19,4 +19,15 @@
     <string name="ketik_pencarian">Ketik Pencarian</string>
     <string name="reviews">REVIEWS</string>
     <string name="_4_5">4.5</string>
+    <string name="filter">Filter</string>
+    <string name="genre">Genre</string>
+    <string name="sort">Sort</string>
+    <string name="terbaru">Terbaru</string>
+    <string name="terpopuler">Terpopuler</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="latest">Latest</string>
+    <string name="popular">Popular</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="loading">Loading …</string>
 </resources>

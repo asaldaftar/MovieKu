@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/size300"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    app:cardCornerRadius="@dimen/size10">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:padding="@dimen/space16">
+
+        <TextView
+            android:id="@+id/labelFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filter"
+            android:textColor="@color/colorBlue"
+            android:textSize="@dimen/font14"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/labelPeriode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/genre"
+            android:layout_marginTop="@dimen/space16"
+            android:textColor="@color/colorFontDefault"
+            android:textSize="@dimen/font12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/labelFilter"/>
+
+        <Spinner
+            android:id="@+id/spinnerGenre"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size40"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/space8"
+            android:background="@drawable/bg_input_white"
+            android:focusableInTouchMode="true"
+            android:gravity="center_vertical"
+            android:padding="@dimen/space8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/labelPeriode" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerGenre">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space16"
+                android:text="@string/sort"
+                android:textColor="@color/colorFontDefault"
+                android:textSize="@dimen/font12" />
+
+            <RadioGroup
+                android:id="@+id/radioGroupSortMovie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space8"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/radioLatest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:visibility="gone"
+                    android:text="@string/latest"
+                    android:textSize="@dimen/font14" />
+
+                <RadioButton
+                    android:id="@+id/radioPopular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/popular"
+                    android:textSize="@dimen/font14" />
+
+                <RadioButton
+                    android:id="@+id/radioTopRated"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/top_rated"
+                    android:textSize="@dimen/font14" />
+
+                <RadioButton
+                    android:id="@+id/radioUpcoming"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/upcoming"
+                    android:textSize="@dimen/font14" />
+
+                <RadioButton
+                    android:id="@+id/radioNowPlaying"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/now_playing"
+                    android:textSize="@dimen/font14" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size40"
+            android:background="@drawable/bg_btn_blue"
+            android:text="Terapkan"
+            android:textAllCaps="false"
+            android:layout_marginTop="@dimen/space16"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout12" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

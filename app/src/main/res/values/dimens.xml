@@ -23,4 +23,5 @@
     <dimen name="font10">10sp</dimen>
     <dimen name="space12">12dp</dimen>
     <dimen name="size18">18dp</dimen>
+    <dimen name="size300">300dp</dimen>
 </resources>

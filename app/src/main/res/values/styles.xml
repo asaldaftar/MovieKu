@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="RatingBar" parent="Theme.MovieKu">
-        <item name="colorControlActivated">@color/colorRating</item>
-        <item name="colorControlNormal">@android:color/holo_green_light</item>
-    </style>
     <style name="Widget.MaterialComponents.Chip.Action.MovieInfoChip">
         <item name="chipBackgroundColor">@color/colorBlue</item>
         <item name="android:textColor">@color/colorWhite</item>

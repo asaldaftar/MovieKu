@@ -32,7 +32,7 @@ sealed class ApiResponse<T> {
 
             if (BuildConfig.DEBUG) {
                 Log.d(TAG, "ApiResponse: response: ${response}")
-                Log.d(TAG, "ApiResponse: raw: ${response.raw()}")
+                    Log.d(TAG, "ApiResponse: raw: ${response.raw()}")
                 Log.d(TAG, "ApiResponse: headers: ${response.headers()}")
                 Log.d(TAG, "ApiResponse: message: ${response.message()}")
             }
@@ -49,7 +49,7 @@ sealed class ApiResponse<T> {
                         code
                     )
                 } else if (code == 403) {
-                    ApiUnAuthorizedResponse(
+                    ApiErrorResponse(
                         "403 The resource you requested could not be found.",
                         code
                     )

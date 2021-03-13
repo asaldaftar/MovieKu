@@ -12,7 +12,9 @@ data class MovieModel(
     @SerializedName("release_date")
     var release_date: String,
     @SerializedName("genre_ids")
-    var genre_ids: IntArray,
+    var genre_ids: IntArray? = null,
+    @SerializedName("genres")
+    var genres: IntArray? = null,
     @SerializedName("id")
     var id: Int = 0,
     @SerializedName("original_title")
@@ -32,5 +34,25 @@ data class MovieModel(
     @SerializedName("vote_average")
     var vote_average: Number,
     @SerializedName("name")
-    var name: String
+    var name: String,
+    @SerializedName("budget")
+    var budget: String? = null,
+    @SerializedName("homepage")
+    var homepage: String? = null,
+    @SerializedName("imdb_id")
+    var imdb_id: String? = null,
+    @SerializedName("production_companies")
+    var production_companies: String? = null,
+    @SerializedName("production_countries")
+    var production_countries: String? = null,
+    @SerializedName("revenue")
+    var revenue: Int? = 0,
+    @SerializedName("runtime")
+    var runtime: Int? = 0,
+    @SerializedName("spoken_languages")
+    var spoken_languages: IntArray? = null,
+    @SerializedName("status")
+    var status: String? = null,
+    @SerializedName("tagline")
+    var tagline: String? = null
 )
