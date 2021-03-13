@@ -1,7 +1,6 @@
 package com.irvan.movieku.mvvm.view.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -10,12 +9,14 @@ import com.irvan.movieku.BuildConfig
 import com.irvan.movieku.R
 import com.irvan.movieku.databinding.ItemLoadingBinding
 import com.irvan.movieku.databinding.ItemMovieBinding
+import com.irvan.movieku.helpers.FormatStringHelper
 import com.irvan.movieku.mvvm.models.MovieModel
 import com.irvan.movieku.mvvm.view.viewholders.LoadingHolder
 import com.irvan.movieku.sessions.SessionManager
 
 class MovieAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var models: MutableList<MovieModel> = mutableListOf()
+    private var stringHelper: FormatStringHelper = FormatStringHelper()
 
     private val VIEW_MOVIE = 1
     private val VIEW_LOADING = 0
@@ -67,9 +68,12 @@ class MovieAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private fun addLoading() {
         val loading = MovieModel(
             "0", false, "",
-            "", intArrayOf(0), -1, "",
-            "", "", "", 0,
-            0, false, 0, ""
+            "", intArrayOf(0), intArrayOf(0), -1,
+            "", "", "", null,
+            0, 0, false, 0, "",
+            "", "", "", "",
+            "", 0, 0, null,
+            "", ""
         )
         models.add(loading)
         notifyDataSetChanged()
@@ -103,6 +107,7 @@ class MovieAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             holder.binding.txtReviews.text = "${model.vote_count} reviews"
             holder.binding.txtDesc.text = model.overview
             holder.binding.txtWacth.text = model.popularity.toString()
+            holder.binding.txtRelease.text = stringHelper.convertDateToIndo(model.release_date)
             if (model.poster_path != null) {
                 Glide.with(holder.itemView.context)
                     .load(BuildConfig.URL_IMG_500 + model.poster_path)

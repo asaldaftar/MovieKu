@@ -7,11 +7,13 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.irvan.movieku.BuildConfig
 import com.irvan.movieku.database.dao.FavoriteDao
+import com.irvan.movieku.database.dao.GenreDao
 import com.irvan.movieku.mvvm.models.FavoriteModel
+import com.irvan.movieku.mvvm.models.GenreModel
 
 
 @Database(
-    entities = [FavoriteModel::class],
+    entities = [FavoriteModel::class, GenreModel::class],
     version = 1
 )
 
@@ -19,6 +21,7 @@ import com.irvan.movieku.mvvm.models.FavoriteModel
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun favoriteDao(): FavoriteDao
+    abstract fun genreDao(): GenreDao
     companion object {
         @Volatile
         private var instance: AppDatabase? = null

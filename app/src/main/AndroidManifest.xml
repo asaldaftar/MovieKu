@@ -26,18 +26,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mvvm.view.activities.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".mvvm.view.activities.MainActivity"/>
 
         <service
             android:name=".services.AppService"
-            android:enabled="true" /> <!-- END SERVICE -->
-        <!-- START BROADCAST RECEIVER -->
+            android:enabled="true" />
         <receiver
             android:name=".receivers.RestartBroadcastReceiver"
             android:enabled="true"

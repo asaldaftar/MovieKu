@@ -7,10 +7,8 @@ import com.irvan.movieku.mvvm.models.MovieModel
 data class MovieListResponse(
     @SerializedName("page")
     var page: Int,
-    @SerializedName("msg")
-    var msg: String,
     @SerializedName("dates")
-    val dates: Date,
+    val dates: Date? = null,
     @SerializedName("results")
     val results: MutableList<MovieModel>,
     @SerializedName("total_pages")
