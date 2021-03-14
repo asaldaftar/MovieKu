@@ -8,17 +8,16 @@ import com.bumptech.glide.Glide
 import com.irvan.movieku.BuildConfig
 import com.irvan.movieku.R
 import com.irvan.movieku.databinding.ItemLoadingBinding
-import com.irvan.movieku.databinding.ItemMovieBinding
+import com.irvan.movieku.databinding.ItemReviewBinding
 import com.irvan.movieku.helpers.FormatStringHelper
-import com.irvan.movieku.mvvm.models.MovieModel
+import com.irvan.movieku.mvvm.models.ReviewModel
 import com.irvan.movieku.mvvm.view.viewholders.LoadingHolder
-import com.irvan.movieku.sessions.SessionManager
 
-class MovieAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var models: MutableList<MovieModel> = mutableListOf()
+class ReviewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private var models: MutableList<ReviewModel> = mutableListOf()
     private var stringHelper: FormatStringHelper = FormatStringHelper()
 
-    private val VIEW_MOVIE = 1
+    private val VIEW_REVIEW = 1
     private val VIEW_LOADING = 0
 
     private var onClickListener: OnClickListener? = null
@@ -27,7 +26,7 @@ class MovieAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         this.onClickListener = onClickListener
     }
 
-    fun setModels(models: MutableList<MovieModel>) {
+    fun setModels(models: MutableList<ReviewModel>) {
         this.models = models
         if (this.models.size > 0 && this.models.size % BuildConfig.LIMIT_PAGINATION.toInt() == 0) {
             addLoading()
@@ -36,7 +35,7 @@ class MovieAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    fun getModels(): MutableList<MovieModel> {
+    fun getModels(): MutableList<ReviewModel> {
         return models
     }
 
@@ -52,7 +51,7 @@ class MovieAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     fun hideLoading() {
         if (isLoading()) {
-            if (models.size > 0 && models[models.size - 1].id == -1) {
+            if (models.size > 0 && models[models.size - 1].id.equals("-1")) {
                 models.removeAt(models.size - 1)
             }
             notifyDataSetChanged()
@@ -66,28 +65,23 @@ class MovieAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     private fun addLoading() {
-        val loading = MovieModel(
-            "0", false, "",
-            "", intArrayOf(0), null, -1,
-            "", "", "", null,
-            0, 0, false, 0, "",
-            "", "", "", null,
-            null, 0, 0, null,
-            "", ""
+        val loading = ReviewModel(
+            "-1", "", null,
+            "","","",""
         )
         models.add(loading)
         notifyDataSetChanged()
     }
 
     private fun isLoading(): Boolean {
-        return models.size > 0 && models[models.size - 1].id == -1
+        return models.size > 0 && models[models.size - 1].id.equals("-1")
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
-            VIEW_MOVIE -> MovieItemHolder(
-                ItemMovieBinding.inflate(
+            VIEW_REVIEW -> ReviewItemHolder(
+                ItemReviewBinding.inflate(
                     inflater,
                     parent,
                     false
@@ -99,17 +93,15 @@ class MovieAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         val model = models[position]
-        if (viewHolder.itemViewType == VIEW_MOVIE) {
-            val holder = viewHolder as MovieItemHolder
-            holder.binding.txtTitle.text = model.title
-            holder.binding.rating.rating = (model.vote_average.toFloat() / 2)
-            holder.binding.txtReviews.text = "${model.vote_count} reviews"
-            holder.binding.txtDesc.text = model.overview
-            holder.binding.txtWacth.text = model.popularity.toString()
-            holder.binding.txtRelease.text = stringHelper.convertDateToIndo(model.release_date)
-            if (model.poster_path != null) {
+        if (viewHolder.itemViewType == VIEW_REVIEW) {
+            val holder = viewHolder as ReviewItemHolder
+            holder.binding.txtFullname.text = model.author
+            holder.binding.txtComment.text = model.content
+            holder.binding.txtDateCreated.text = stringHelper.convertDateToIndo(model.createdAt)
+            holder.binding.txtRating.text = model.authorDetails?.rating.toString()
+            if (model.authorDetails?.avatar_path != null) {
                 Glide.with(holder.itemView.context)
-                    .load(BuildConfig.URL_IMG_500 + model.poster_path)
+                    .load(BuildConfig.URL_IMG_500 + model.authorDetails?.avatar_path)
                     .placeholder(
                         ContextCompat.getDrawable(
                             holder.itemView.context,
@@ -122,15 +114,12 @@ class MovieAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                             R.drawable.broken_image
                         )
                     )
-                    .into(holder.binding.imgCover)
+                    .into(holder.binding.imgUser)
             } else {
-                holder.binding.imgCover.setImageResource(R.drawable.broken_image)
+                holder.binding.imgUser.setImageResource(R.drawable.broken_image)
             }
 
             if (onClickListener != null) {
-                holder.binding.imgFav.setOnClickListener {
-                    onClickListener?.onClickFav(model, position)
-                }
                 holder.binding.root.setOnClickListener {
                     onClickListener?.onClick(model, position)
                 }
@@ -139,10 +128,10 @@ class MovieAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (models[position].id == -1) {
+        return if (models[position].id.equals("-1")) {
             VIEW_LOADING
         } else {
-            VIEW_MOVIE
+            VIEW_REVIEW
         }
     }
 
@@ -150,11 +139,10 @@ class MovieAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int = models.size
 
-    class MovieItemHolder(val binding: ItemMovieBinding) :
+    class ReviewItemHolder(val binding: ItemReviewBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     interface OnClickListener {
-        fun onClick(model: MovieModel, position: Int)
-        fun onClickFav(model: MovieModel, position: Int)
+        fun onClick(model: ReviewModel, position: Int)
     }
 }

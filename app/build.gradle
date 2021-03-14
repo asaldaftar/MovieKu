@@ -30,6 +30,7 @@ android {
         addConstant("URL_IMG_500", "https://image.tmdb.org/t/p/w500")
         addConstant("URL_IMG_ORI", "https://image.tmdb.org/t/p/original")
         addConstant("DATABASE_NAME", "movieku.db")
+        addConstant("URL_YOUTUBE", "https://www.youtube.com/watch?v=")
         addConstant("LIMIT_PAGINATION", 20)
 
         javaCompileOptions {

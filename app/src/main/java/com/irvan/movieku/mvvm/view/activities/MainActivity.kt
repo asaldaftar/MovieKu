@@ -1,7 +1,9 @@
 package com.irvan.movieku.mvvm.view.activities
 
+import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.irvan.movieku.R
 import com.irvan.movieku.databinding.ActivityMainBinding
 import com.irvan.movieku.helpers.FragmentNavigationHelper
@@ -18,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var favoriteFragment: FavoriteFragment
     lateinit var detailMovieFragment: DetailMovieFragment
     lateinit var sessionManager: SessionManager
+    private var loading: ProgressDialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -26,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         initComponents()
         initFragments()
-        if(sessionManager.readLoginStatus()){
+        if(!sessionManager.readLoginStatus()){
             sessionManager.setUserSession(sessionManager.generateSession())
         }
         fragmentNavigationHelper.setFragmentNavigation(
@@ -58,6 +61,19 @@ class MainActivity : AppCompatActivity() {
             )
         } else {
             fragmentNavigationHelper.backstackFragment(true)
+        }
+    }
+
+    fun showLoading() {
+        if (loading == null) {
+            loading = ProgressDialog.show(this, null, "Harap Tunggu ...", true, false)
+        }
+    }
+
+    fun hideLoading() {
+        if (loading != null) {
+            loading!!.dismiss()
+            loading = null
         }
     }
 }

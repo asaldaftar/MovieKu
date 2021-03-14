@@ -9,6 +9,8 @@ data class ReviewModel(
     var author: String,
     @SerializedName("author_details")
     var authorDetails: AuthorModel? = null,
+    @SerializedName("content")
+    var content: String,
     @SerializedName("url")
     var url: String,
     @SerializedName("created_at")

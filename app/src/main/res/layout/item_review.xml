@@ -74,7 +74,7 @@
         tools:text="@string/lorem_ipsum" />
 
     <View
-        android:id="@+id/strokeReply"
+        android:id="@+id/stroke"
         android:layout_width="0dp"
         android:layout_height="@dimen/size1"
         android:layout_marginTop="@dimen/space16"
