@@ -3,12 +3,8 @@ package com.irvan.movieku.mvvm.viewmodels
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.Observer
-import com.irvan.movieku.BuildConfig
-import com.irvan.movieku.mvvm.models.GenreModel
+import com.irvan.movieku.mvvm.models.FavoriteModel
 import com.irvan.movieku.mvvm.repositories.MovieRepository
-import com.irvan.movieku.utils.Resource
 
 
 class MovieViewModel(application: Application) : AndroidViewModel(application) {
@@ -18,8 +14,6 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
     var page = 1
     private var cancelRequest = false
     private var repository = MovieRepository.getInstance(application)!!
-    private var genreModels: MediatorLiveData<Resource<MutableList<GenreModel>?>> =
-        MediatorLiveData()
 
     fun getMovieGenre() {
         repository.getMovieGenreApi()
@@ -110,12 +104,45 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun getListMovieReview(movie_id: String, page: Int, map: HashMap<String, String>) {
+        if (!isRequest) {
+            this.isRequest = true
+            this.page = page
+            this.isQueryExhausted = false
+            repository.getListReview(movie_id, page, map)
+        }
+    }
+
+    fun nextPageListMovieReview(moview_id: String, map: HashMap<String, String>) {
+        if (!isRequest && !isQueryExhausted && !isNextPage) {
+            page++
+            isNextPage = true
+            getListMovieReview(moview_id, page, map)
+        }
+    }
+
+    fun addToFavorite(favoriteModel: FavoriteModel) = repository.addToFavorite(favoriteModel)
+    fun getFavorite(session_id: String): LiveData<MutableList<FavoriteModel>> = repository.getFavorite(session_id)
+    fun checkIfFavorite(session_id: String, movie_id: String) =
+        repository.checkIfFavorite(session_id, movie_id)
+
+    fun getMovieDetail(movie_id: String) = repository.getMovieDetail(movie_id)
+    fun getVideo(movie_id: String) = repository.getVideo(movie_id)
+    fun getGenreById(id: String) = repository.getGenreById(id)
+
     fun isListMovieLoaded() = repository.isListMovieLoaded()
+    fun isMovieLoaded() = repository.isMovieLoaded()
+    fun isVideoLoaded() = repository.isVideoLoaded()
+    fun isReviewLoaded() = repository.isReviewLoaded()
+    fun isFav() = repository.isFav()
     fun getListMovieUpcomingModels() = repository.getListMovieUpcomingModels()
     fun getListMoviePopularModels() = repository.getListMoviePopularModels()
     fun getListMovieTopRatedModels() = repository.getListMovieTopRatedModels()
     fun getListMovieNowPlayingModels() = repository.getListMovieNowPlayingModels()
     fun getListMovieSortedModels() = repository.getListMovieSortedModels()
     fun getListMovieGenre() = repository.getMovieGenre()
+    fun getMovieDetailModel() = repository.getMovieDetailModel()
+    fun getListVideoModels() = repository.getListVideoModels()
+    fun getListReviewModels() = repository.getListReviewModels()
 
 }

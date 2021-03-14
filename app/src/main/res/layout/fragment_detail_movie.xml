@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context=".mvvm.view.fragments.DetailMovieFragment">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -19,8 +19,8 @@
             android:id="@+id/imgPoster"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="64dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="64dp"
             android:layout_marginEnd="8dp"
             android:background="@color/colorDarkBlue"
             android:elevation="4dp"
@@ -54,6 +54,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/headerMain" />
+
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="0dp"
@@ -64,12 +65,12 @@
             android:elevation="4dp"
             android:ellipsize="end"
             android:paddingBottom="8dp"
+            android:text="@string/hotel_transylvania_3_summer_vacation"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             android:textColor="@color/colorWhite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imgPoster"
-            app:layout_constraintTop_toTopOf="@+id/imgPoster"
-            android:text="@string/hotel_transylvania_3_summer_vacation"/>
+            app:layout_constraintTop_toTopOf="@+id/imgPoster" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/cgMovieInfo"
@@ -106,6 +107,7 @@
                 tools:text="7.6" />
 
         </com.google.android.material.chip.ChipGroup>
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/posterWidthGuideline"
             android:layout_width="wrap_content"
@@ -124,29 +126,29 @@
             android:id="@+id/txtLabelDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space16"
             android:layout_marginStart="@dimen/space8"
+            android:layout_marginTop="@dimen/space16"
             android:layout_marginEnd="@dimen/space8"
             android:orientation="vertical"
+            android:text="@string/description"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
             android:textColor="@color/colorDarkBlue"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:text="@string/description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgPoster"/>
+            app:layout_constraintTop_toBottomOf="@+id/imgPoster" />
 
         <TextView
             android:id="@+id/txtDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/space16"
             android:layout_marginStart="@dimen/space8"
+            android:layout_marginTop="@dimen/space16"
             android:layout_marginEnd="@dimen/space8"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             android:text="@string/lorem_ipsum"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtLabelDesc" />
@@ -156,8 +158,8 @@
             android:id="@+id/txtLabelTrailer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space16"
             android:layout_marginStart="@dimen/space8"
+            android:layout_marginTop="@dimen/space16"
             android:layout_marginEnd="@dimen/space8"
             android:orientation="vertical"
             android:text="@string/trailer"
@@ -165,6 +167,7 @@
             android:textColor="@color/colorDarkBlue"
             android:textSize="14sp"
             android:textStyle="bold"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtDesc" />
@@ -174,23 +177,24 @@
             android:id="@+id/youtubePlayer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="@dimen/size200"
-            android:layout_marginTop="@dimen/space16"
             android:layout_marginStart="@dimen/space8"
+            android:layout_marginTop="@dimen/space16"
             android:layout_marginEnd="@dimen/space8"
+            android:minHeight="@dimen/size200"
+            android:visibility="gone"
             app:autoPlay="false"
-            app:showFullScreenButton="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtLabelTrailer" />
+            app:layout_constraintTop_toBottomOf="@+id/txtLabelTrailer"
+            app:showFullScreenButton="false" />
 
 
-    <TextView
+        <TextView
             android:id="@+id/txtLabelReview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space16"
             android:layout_marginStart="@dimen/space8"
+            android:layout_marginTop="@dimen/space16"
             android:layout_marginEnd="@dimen/space8"
             android:orientation="vertical"
             android:text="@string/reviews"
@@ -198,6 +202,7 @@
             android:textColor="@color/colorDarkBlue"
             android:textSize="14sp"
             android:textStyle="bold"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/youtubePlayer" />
@@ -207,10 +212,11 @@
             android:id="@+id/recyclerReview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="@dimen/size200"
-            android:layout_marginTop="@dimen/space16"
             android:layout_marginStart="@dimen/space8"
+            android:layout_marginTop="@dimen/space16"
             android:layout_marginEnd="@dimen/space8"
+            android:minHeight="@dimen/size200"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtLabelReview" />

@@ -37,9 +37,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space16"
             android:text="@string/movieku"
+            android:textColor="@color/colorBlue"
             android:textSize="@dimen/font16"
             android:textStyle="bold"
-            android:textColor="@color/colorBlue"
             app:layout_constraintBottom_toBottomOf="@+id/imgIcon"
             app:layout_constraintStart_toEndOf="@+id/imgIcon"
             app:layout_constraintTop_toTopOf="@+id/imgIcon" />
@@ -86,26 +86,39 @@
                 android:src="@drawable/ic_baseline_search_24" />
 
         </RelativeLayout>
+
         <ImageView
             android:id="@+id/imgSearch"
             android:layout_width="@dimen/size25"
             android:layout_height="@dimen/size25"
             android:contentDescription="@string/image"
-            android:visibility="gone"
             android:src="@drawable/ic_baseline_search_24"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imgFav"
             android:layout_width="@dimen/size25"
             android:layout_height="@dimen/size25"
             android:contentDescription="@string/image"
-            android:src="@drawable/ic_baseline_favorite_red"
+            android:src="@drawable/ic_baseline_favorite_border_24"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgCollection"
+            android:layout_width="@dimen/size25"
+            android:layout_height="@dimen/size25"
+            android:contentDescription="@string/image"
+            android:src="@drawable/ic_baseline_collections_bookmark_24"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

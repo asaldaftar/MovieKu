@@ -1,6 +1,7 @@
 package com.irvan.movieku.mvvm.view.fragments
 
 import android.app.Dialog
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.os.Handler
@@ -19,15 +20,23 @@ import com.irvan.movieku.BuildConfig
 import com.irvan.movieku.R
 import com.irvan.movieku.databinding.FragmentHomeBinding
 import com.irvan.movieku.mvvm.models.MovieModel
+import com.irvan.movieku.mvvm.view.activities.MainActivity
 import com.irvan.movieku.mvvm.view.adapters.MovieAdapter
 import com.irvan.movieku.mvvm.viewmodels.MovieViewModel
 import com.irvan.movieku.sessions.SessionManager
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var mainActivity: MainActivity
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -83,6 +92,8 @@ class HomeFragment : Fragment() {
             ArrayAdapter(requireContext(), R.layout.item_spinner_selected, genreName)
         genreAdapter.setDropDownViewResource(R.layout.item_spinner_dropdown)
 
+        binding.headerMain.imgCollection.visibility = View.VISIBLE
+        binding.headerMain.imgFav.visibility = View.GONE
     }
 
 
@@ -286,7 +297,23 @@ class HomeFragment : Fragment() {
     private fun subscribeListeners() {
         adapter.setOnClickListener(object : MovieAdapter.OnClickListener {
             override fun onClick(model: MovieModel, position: Int) {
-                //detail
+                if (mainActivity.detailMovieFragment != null) {
+                    mainActivity.supportFragmentManager.beginTransaction()
+                        .remove(mainActivity.detailMovieFragment)
+                        .commitAllowingStateLoss()
+                }
+                mainActivity.detailMovieFragment = DetailMovieFragment()
+                val bundle = Bundle()
+                bundle.putString(
+                    DetailMovieFragment.MOVIE_ID,
+                    model.id.toString()
+                )
+                mainActivity.detailMovieFragment.arguments = bundle
+                mainActivity.fragmentNavigationHelper.setFragmentNavigation(
+                    mainActivity.detailMovieFragment,
+                    mainActivity.detailMovieFragment::class.java.simpleName,
+                    false
+                )
             }
 
             override fun onClickFav(model: MovieModel, position: Int) {
@@ -348,8 +375,18 @@ class HomeFragment : Fragment() {
             }
         })
 
-        binding.headerMain.imgFav.setOnClickListener {
-            //list fav
+        binding.headerMain.imgCollection.setOnClickListener {
+            if (mainActivity.favoriteFragment != null) {
+                mainActivity.supportFragmentManager.beginTransaction()
+                    .remove(mainActivity.favoriteFragment)
+                    .commitAllowingStateLoss()
+            }
+            mainActivity.favoriteFragment = FavoriteFragment()
+            mainActivity.fragmentNavigationHelper.setFragmentNavigation(
+                mainActivity.favoriteFragment,
+                mainActivity.favoriteFragment::class.java.simpleName,
+                false
+            )
         }
 
         binding.swipeRefresh.setOnRefreshListener {
@@ -443,7 +480,7 @@ class HomeFragment : Fragment() {
                     }
                     else -> "default"
                 }
-                if(!filterData.equals("default")){
+                if (!filterData.equals("default")) {
                     spinnerGenre.setSelection(0)
                 }
             }
