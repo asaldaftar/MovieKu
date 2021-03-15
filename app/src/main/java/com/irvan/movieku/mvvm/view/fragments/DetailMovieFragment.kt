@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,13 +24,11 @@ import com.irvan.movieku.mvvm.models.MovieModel
 import com.irvan.movieku.mvvm.models.ReviewModel
 import com.irvan.movieku.mvvm.models.VideoModel
 import com.irvan.movieku.mvvm.view.activities.MainActivity
-import com.irvan.movieku.mvvm.view.adapters.MovieAdapter
 import com.irvan.movieku.mvvm.view.adapters.ReviewAdapter
 import com.irvan.movieku.mvvm.viewmodels.MovieViewModel
 import com.irvan.movieku.sessions.SessionManager
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -135,6 +132,7 @@ class DetailMovieFragment : Fragment() {
                 movieViewModel.getListMovieReview(movieId!!, 1, query)
                 movieViewModel.getListVideoModels().value = null
             } else {
+                movieViewModel.getListMovieReview(movieId!!, 1, query)
                 mainActivity.hideLoading()
             }
 
@@ -172,37 +170,38 @@ class DetailMovieFragment : Fragment() {
 
         movieViewModel.getListReviewModels().removeObservers(viewLifecycleOwner)
         movieViewModel.getListReviewModels().observe(viewLifecycleOwner, Observer {
-            if (it != null && it.size > 0) {
-                binding.txtLabelReview.visibility = View.VISIBLE
-                binding.recyclerReview.visibility = View.VISIBLE
-                if (adapter.getModels().size == 0) {
-                    if (!(it.size > 0 && it.size % BuildConfig.LIMIT_PAGINATION.toInt() == 0)) {
-                        if (movieViewModel.isQueryExhausted) {
-                            movieViewModel.isQueryExhausted = true
+            if (it != null) {
+                Log.d("LOG_DATA", "subscribeObservers: ${it.size}")
+                if (it.size > 0) {
+                    binding.txtLabelReview.visibility = View.VISIBLE
+                    binding.recyclerReview.visibility = View.VISIBLE
+                    if (adapter.getModels().size == 0) {
+                        if (!(it.size > 0 && it.size % BuildConfig.LIMIT_PAGINATION.toInt() == 0)) {
+                            if (movieViewModel.isQueryExhausted) {
+                                movieViewModel.isQueryExhausted = true
+                            }
                         }
+                        adapter.setModels(it)
+                    } else {
+                        val temporary = adapter.getModels()
+                        temporary.addAll(it)
+                        if (!(temporary.size > 0 && temporary.size % BuildConfig.LIMIT_PAGINATION.toInt() == 0)) {
+                            if (movieViewModel.isQueryExhausted) {
+                                movieViewModel.isQueryExhausted = true
+                            }
+                        }
+                        adapter.setModels(temporary)
                     }
-                    adapter.setModels(it)
                 } else {
-                    val temporary = adapter.getModels()
-                    temporary.addAll(it)
-                    if (!(temporary.size > 0 && temporary.size % BuildConfig.LIMIT_PAGINATION.toInt() == 0)) {
-                        if (movieViewModel.isQueryExhausted) {
-                            movieViewModel.isQueryExhausted = true
-                        }
-                    }
-                    adapter.setModels(temporary)
+                    binding.txtLabelReview.visibility = View.GONE
+                    binding.recyclerReview.visibility = View.GONE
                 }
-                movieViewModel.getListReviewModels().value = null
-            }else{
-                binding.txtLabelReview.visibility = View.GONE
-                binding.recyclerReview.visibility = View.GONE
             }
         })
 
         movieViewModel.isFav().removeObservers(viewLifecycleOwner)
         movieViewModel.isFav().observe(viewLifecycleOwner, Observer {
             isFav = it
-            Log.d("LOG_FAV", "subscribeObservers: $isFav")
             if (it) {
                 binding.headerMain.imgFav.setImageResource(R.drawable.ic_baseline_favorite_red)
             } else {
@@ -220,7 +219,6 @@ class DetailMovieFragment : Fragment() {
         }
         binding.headerMain.imgFav.setOnClickListener {
             if(movieId != null && movieDetailModel != null && sessionManager.token != null){
-                Log.d("LOG_FAV", "subscribeListeners: $isFav")
                 val fav = FavoriteModel(
                     0, sessionManager.token!!, movieId!!, movieDetailModel!!.poster_path ,
                     movieDetailModel!!.title, !isFav

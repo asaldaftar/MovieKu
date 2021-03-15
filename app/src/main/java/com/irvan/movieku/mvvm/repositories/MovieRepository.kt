@@ -3,6 +3,7 @@ package com.irvan.movieku.mvvm.repositories
 import android.app.Application
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
