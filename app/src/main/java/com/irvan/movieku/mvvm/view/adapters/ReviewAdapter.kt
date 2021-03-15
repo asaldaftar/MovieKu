@@ -1,6 +1,8 @@
 package com.irvan.movieku.mvvm.view.adapters
 
+
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -67,7 +69,7 @@ class ReviewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private fun addLoading() {
         val loading = ReviewModel(
             "-1", "", null,
-            "","","",""
+            "", "", "", ""
         )
         models.add(loading)
         notifyDataSetChanged()
@@ -80,7 +82,7 @@ class ReviewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
-            VIEW_REVIEW -> ReviewItemHolder(
+            VIEW_REVIEW -> ReviewHolder(
                 ItemReviewBinding.inflate(
                     inflater,
                     parent,
@@ -94,11 +96,15 @@ class ReviewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         val model = models[position]
         if (viewHolder.itemViewType == VIEW_REVIEW) {
-            val holder = viewHolder as ReviewItemHolder
+            val holder = viewHolder as ReviewHolder
             holder.binding.txtFullname.text = model.author
             holder.binding.txtComment.text = model.content
             holder.binding.txtDateCreated.text = stringHelper.convertDateToIndo(model.createdAt)
-            holder.binding.txtRating.text = model.authorDetails?.rating.toString()
+            if(model.authorDetails?.rating != null){
+                holder.binding.txtRating.text = model.authorDetails?.rating.toString()
+            }else{
+                holder.binding.txtRating.visibility = View.INVISIBLE
+            }
             if (model.authorDetails?.avatar_path != null) {
                 Glide.with(holder.itemView.context)
                     .load(BuildConfig.URL_IMG_500 + model.authorDetails?.avatar_path)
@@ -139,7 +145,7 @@ class ReviewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int = models.size
 
-    class ReviewItemHolder(val binding: ItemReviewBinding) :
+    class ReviewHolder(val binding: ItemReviewBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     interface OnClickListener {

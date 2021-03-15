@@ -14,11 +14,4 @@ data class ReviewListResponse(
     val total_pages: Int = 0,
     @SerializedName("total_results")
     val total_results: Int = 0
-) {
-    data class Date(
-        @SerializedName("maximum")
-        val maximum: String,
-        @SerializedName("minimum")
-        val minimum: String
-    )
-}
+)
